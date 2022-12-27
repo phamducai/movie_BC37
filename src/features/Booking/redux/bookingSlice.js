@@ -7,6 +7,7 @@ const inititalState = {
   movieDetail: null,
   movieDetailSchedule: null,
   cinemas: [],
+  cinemaschedule: [],
 };
 
 const reducer = (state = inititalState, { type, payload }) => {
@@ -29,6 +30,9 @@ const reducer = (state = inititalState, { type, payload }) => {
         break;
       case actions.SET_CINEMAS:
         draft.cinemas = payload;
+        break;
+      case actions.SCHEDULE_CINEMAS:
+        draft.cinemaschedule = payload;
         break;
       default:
         break;

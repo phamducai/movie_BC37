@@ -98,3 +98,19 @@ export const fetchMovieDetailScheduleAction = (id) => {
     }
   };
 };
+export const getScheduleMovieCinema = (id) => {
+  return async (next) => {
+    try {
+      const res = await requester({
+        method: "GET",
+        url: apiPath.SCHEDULE_CINEMAS + `?maHeThongRap=${id}&maNhom=GP01`,
+      });
+      next({
+        type: actions.SCHEDULE_CINEMAS,
+        payload: res.data.content,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

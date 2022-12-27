@@ -3,17 +3,12 @@ module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
     extend: {
-      height: {
-        99: "55rem",
+      backgroundColor: {
+        "bg-btn": "rgba(246, 246, 246, 0.5)",
       },
-      // colors: () => ({
-      //   lime: {
-      //     400: "red",
-      //   },
-      // }),
-      // fontSize: {
-      //   "2xl": "200px",
-      // },
+      height: {
+        "h-200": "50rem",
+      },
     },
   },
   plugins: [],

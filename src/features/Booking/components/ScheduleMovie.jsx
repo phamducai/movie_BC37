@@ -5,10 +5,11 @@ import { Button, Tabs } from "antd";
 import { getScheduleMovieCinema } from "../utils/bookService";
 import { useEffect } from "react";
 import moment from "moment";
-//formik
 export const ScheduleMovie = () => {
   const [listSchedule, setListSchedule] = useState([]);
   const cinemas = useSelector((state) => state.booking.cinemas);
+  const cinemaschedule = useSelector((state) => state.booking.cinemaschedule);
+  console.log(cinemaschedule);
   useEffect(() => {
     getScheduleMovieCinema(cinemas[0]?.maHeThongRap).then((res) =>
       setListSchedule(res.data.content)
@@ -17,7 +18,10 @@ export const ScheduleMovie = () => {
 
   console.log(listSchedule);
   return (
-    <div className="w-4/5 m-auto">
+    <div
+      className="w-4/5 m-auto"
+      style={{ overflowY: "scroll", height: "720px" }}
+    >
       <Tabs
         onChange={(key) => {
           getScheduleMovieCinema(key).then((res) =>
@@ -31,26 +35,26 @@ export const ScheduleMovie = () => {
             key: itemRap.maHeThongRap,
             children:
               listSchedule.length > 0 &&
-              listSchedule[0].lstCumRap.map((itemCumRap, index) => {
+              listSchedule[0].lstCumRap.map((itemCumRap) => {
                 return (
-                  <div key={index} className="flex ">
+                  <div key={itemCumRap.diaChi} className="flex ">
                     <div>
                       {" "}
                       {itemCumRap.tenCumRap}
                       <br />
                       {itemCumRap.diaChi}
                     </div>
-                    <div className="snap-proximity snap-y">
+                    <div>
                       {" "}
-                      {itemCumRap.danhSachPhim.map((item) => {
+                      {itemCumRap?.danhSachPhim.map((item) => {
                         return (
                           item.dangChieu && (
                             <div key={item.maPhim}>
-                              <div className="flex">
+                              <div className="flex p-5 items-start">
                                 <img
                                   src={item.hinhAnh}
                                   alt=""
-                                  className="w-24 h-32"
+                                  className="w-24 h-32 mr-5"
                                 />
                                 <div>
                                   <p>
@@ -59,20 +63,20 @@ export const ScheduleMovie = () => {
                                     {item.tenPhim}
                                   </p>
 
-                                  <div>
+                                  <div className=" grid grid-cols-3 gap-4 ">
                                     {" "}
-                                    {item.lstLichChieuTheoPhim.map(
-                                      (itemhour, index) => {
+                                    {item?.lstLichChieuTheoPhim.map(
+                                      (itemhour) => {
                                         return (
                                           <Button
-                                            className="mr-3  bg-gray-300"
+                                            className="bg-btn"
                                             type="default"
                                             size="default"
-                                            key={index}
+                                            key={itemhour.maLichChieu}
                                           >
                                             {moment(
                                               itemhour?.ngayChieuGioChieu
-                                            ).format("DD/MM/YYYY ~ HH:MM")}
+                                            ).format("DD/MM/YYYY ~HH:MM")}
                                           </Button>
                                         );
                                       }

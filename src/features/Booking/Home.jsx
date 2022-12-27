@@ -3,7 +3,11 @@ import { useDispatch } from "react-redux";
 import HomeCarousel from "./components/HomeCarousel";
 import MovieList from "./components/MovieList";
 import { ScheduleMovie } from "./components/ScheduleMovie";
-import { fetchBannersAction, fetchCinemasAction, fetchMoviesAction } from "./redux/action";
+import {
+  fetchBannersAction,
+  fetchCinemasAction,
+  fetchMoviesAction,
+} from "./redux/action";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,6 +27,7 @@ const Home = () => {
       <HomeCarousel />
       <MovieList />
       <ScheduleMovie />
+      <h1>helo</h1>
     </div>
   );
 
